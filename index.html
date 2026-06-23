@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mystic Numerology - Discover Your Life Path & Destiny Numbers</title>
+<meta name="description" content="Free numerology reading. Discover your life path number, destiny number, and get answers to your questions through the ancient science of numerology.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="particles"></canvas>
+
+<!-- Landing -->
+<section id="landing" class="active-section">
+  <div class="landing-content">
+    <div class="logo-glow">
+      <div class="sacred-geo">
+        <div class="geo-ring r1"></div>
+        <div class="geo-ring r2"></div>
+        <div class="geo-ring r3"></div>
+        <div class="geo-center">7</div>
+      </div>
+      <h1 class="site-title">Mystic Numerology</h1>
+      <p class="tagline">Unlock the hidden power of numbers in your life</p>
+    </div>
+    <div class="landing-features">
+      <div class="feature"><span class="feat-num">1</span><span>Life Path Number</span></div>
+      <div class="feature"><span class="feat-num">2</span><span>Destiny Number</span></div>
+      <div class="feature"><span class="feat-num">3</span><span>Soul Urge</span></div>
+      <div class="feature"><span class="feat-num">4</span><span>Ask a Question</span></div>
+    </div>
+    <div class="landing-actions">
+      <button class="btn-glow" onclick="showSection('input-section')">
+        <span>Reveal Your Numbers</span>
+        <div class="btn-shimmer"></div>
+      </button>
+      <p class="sub-text">Free • No registration • Instant results</p>
+    </div>
+    <div class="ad-container ad-landing">
+      <div class="ad-label">Advertisement</div>
+      <div id="ad-landing-top" style="min-height:90px;width:728px;max-width:100%"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Input Section -->
+<section id="input-section" class="hidden-section">
+  <div class="section-inner">
+    <h2 class="section-title">Enter Your Details</h2>
+    <p class="section-desc">Your name and birthdate hold the keys to your numerological profile</p>
+    
+    <div class="input-grid">
+      <div class="input-group">
+        <label>Full Name</label>
+        <input type="text" id="fullName" placeholder="Enter your full name" autocomplete="off">
+        <p class="input-hint">Use your full birth name for the most accurate reading</p>
+      </div>
+      <div class="input-group">
+        <label>Date of Birth</label>
+        <input type="date" id="birthDate">
+      </div>
+      <div class="input-group full-width">
+        <label>Your Question <span class="optional">(optional)</span></label>
+        <textarea id="userQuestion" placeholder="Ask a question about love, career, or life direction..." rows="3"></textarea>
+      </div>
+    </div>
+
+    <button class="btn-glow" onclick="calculateReading()">
+      <span>Calculate My Numbers</span>
+      <div class="btn-shimmer"></div>
+    </button>
+  </div>
+</section>
+
+<!-- Loading -->
+<section id="loading-section" class="hidden-section">
+  <div class="section-inner loading-content">
+    <div class="loading-orb">
+      <div class="orb-ring o1"></div>
+      <div class="orb-ring o2"></div>
+      <div class="orb-ring o3"></div>
+      <div class="orb-number" id="loadingNum">9</div>
+    </div>
+    <h2 class="section-title">Calculating Your Numbers...</h2>
+    <p class="section-desc" id="loadingText">Analyzing the vibrations of your name...</p>
+  </div>
+</section>
+
+<!-- Results Section -->
+<section id="results-section" class="hidden-section">
+  <div class="section-inner">
+    <h2 class="section-title">Your Numerology Reading</h2>
+    <p id="result-name" class="result-intro"></p>
+
+    <!-- Core Numbers -->
+    <div class="core-numbers">
+      <div class="core-card" id="lifePathCard">
+        <div class="core-num" id="lifePathNum"></div>
+        <div class="core-label">Life Path Number</div>
+        <div class="core-ring"></div>
+      </div>
+      <div class="core-card" id="destinyCard">
+        <div class="core-num" id="destinyNum"></div>
+        <div class="core-label">Destiny Number</div>
+        <div class="core-ring"></div>
+      </div>
+      <div class="core-card" id="soulCard">
+        <div class="core-num" id="soulNum"></div>
+        <div class="core-label">Soul Urge Number</div>
+        <div class="core-ring"></div>
+      </div>
+      <div class="core-card" id="personalityCard">
+        <div class="core-num" id="personalityNum"></div>
+        <div class="core-label">Personality Number</div>
+        <div class="core-ring"></div>
+      </div>
+    </div>
+
+    <!-- Detailed Readings -->
+    <div id="detailed-readings" class="detailed-readings"></div>
+
+    <!-- Question Answer -->
+    <div id="question-answer" class="question-answer hidden"></div>
+
+    <!-- Compatibility -->
+    <div class="compat-section">
+      <h3>Compatibility Check</h3>
+      <p class="section-desc">Enter another name to check your compatibility</p>
+      <div class="compat-input-row">
+        <input type="text" id="compatName" placeholder="Partner's full name">
+        <button class="btn-secondary" onclick="checkCompatibility()">Check</button>
+      </div>
+      <div id="compat-result" class="compat-result hidden"></div>
+    </div>
+
+    <div class="ad-container">
+      <div class="ad-label">Advertisement</div>
+      <div id="ad-results-mid" style="min-height:250px;width:728px;max-width:100%"></div>
+    </div>
+
+    <!-- Lucky Info -->
+    <div id="lucky-info" class="lucky-info"></div>
+
+    <button class="btn-glow" onclick="resetReading()">
+      <span>New Reading</span>
+      <div class="btn-shimmer"></div>
+    </button>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-disclaimer">🔢 Numerology is for entertainment and self-reflection purposes only. It should not replace professional advice. The power to shape your life always remains with you.</p>
+    <p class="footer-copy">&copy; 2026 Mystic Numerology. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+</footer>
+
+<script src="numerology-data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
